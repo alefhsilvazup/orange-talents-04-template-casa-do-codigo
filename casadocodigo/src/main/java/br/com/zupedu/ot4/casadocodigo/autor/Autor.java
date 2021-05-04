@@ -1,11 +1,10 @@
 package br.com.zupedu.ot4.casadocodigo.autor;
 
+import br.com.zupedu.ot4.casadocodigo.compartilhado.VerificaExistenciaNoBanco;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -17,11 +16,21 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String introducao;
 
     @CreationTimestamp
     private LocalDateTime criadoEm = LocalDateTime.now(ZoneOffset.UTC);
+
+    @Deprecated
+    /**
+     * somente o hibernate deve usar essa bagaça
+     */
+    public Autor(){};
+
 
     public Autor(String nome, String email, String introducao) {
         this.nome = nome;
