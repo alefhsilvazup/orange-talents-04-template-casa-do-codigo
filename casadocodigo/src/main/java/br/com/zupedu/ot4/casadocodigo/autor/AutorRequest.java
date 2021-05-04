@@ -17,11 +17,8 @@ class PaisEstadoRequest {
 public class AutorRequest {
 
     private @NotBlank @Length(min = 3) String nome;
-    private @VerificaExistenciaNoBanco(campo = "email", tabela = Autor.class)
-    @NotBlank @Email String email;
+    private @NotBlank @Email String email;
     private @NotBlank @Length(min = 10, max = 400) String descricao;
-
-    private String cnpjOucpf;
 
     public AutorRequest(String nome, String email, String descricao) {
         this.nome = nome;
